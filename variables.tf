@@ -19,8 +19,4 @@ variable "key_name" {
   default     = "vsrx-key"
 }
 
-variable "admin_password" {
-  description = "Password for the admin user (will be hashed in the configuration)"
-  default     = "Ch@ngeMe123"  # Change this to a secure password
-  sensitive   = true
-}
+# Admin password variable removed - using SSH key authentication only

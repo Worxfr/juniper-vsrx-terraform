@@ -192,14 +192,14 @@ locals {
     system {
         host-name vsrx-primary;
         root-authentication {
-            encrypted-password "$1$salt$hashedpassword"; ## SECRET-DATA
+            ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD3P7+HA0h0vbSp0zbEom7iPOV2nMj/X/kkZKYQRyFrVN0bnI7QZ3BrQ5JZ8vFq4VjH/WdFmL5/7NXZSHN7aWxvRL9wEfMmQ4C5RdHyJ5ZJ0rOJYKYJY9gpGFf0QDY2Sxh2P5c6bQXxFT7LMf9PPdQgGs9S6yJf0fJgn0wZ0Wdm+8jeHzJU4CQkQZZAFRjs4MNbZnrciRFM7X+aJ02OjTZUqqJYBGhvQnwD/fX0+s/ojPNyh5FmEbZwj7cKZFj7TH2Qoh9ZU6O0s+64mMOOb8qz3PUzLnKAMUYnzD9DMwuYqCgVP+bdlj0rZRk4Nn9GoZZ8P9kdnoVQZrBQwrOrKvkD";
         }
         login {
             user admin {
                 uid 2000;
                 class super-user;
                 authentication {
-                    encrypted-password "$1$salt$hashedpassword"; ## SECRET-DATA
+                    ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD3P7+HA0h0vbSp0zbEom7iPOV2nMj/X/kkZKYQRyFrVN0bnI7QZ3BrQ5JZ8vFq4VjH/WdFmL5/7NXZSHN7aWxvRL9wEfMmQ4C5RdHyJ5ZJ0rOJYKYJY9gpGFf0QDY2Sxh2P5c6bQXxFT7LMf9PPdQgGs9S6yJf0fJgn0wZ0Wdm+8jeHzJU4CQkQZZAFRjs4MNbZnrciRFM7X+aJ02OjTZUqqJYBGhvQnwD/fX0+s/ojPNyh5FmEbZwj7cKZFj7TH2Qoh9ZU6O0s+64mMOOb8qz3PUzLnKAMUYnzD9DMwuYqCgVP+bdlj0rZRk4Nn9GoZZ8P9kdnoVQZrBQwrOrKvkD";
                 }
             }
         }
@@ -291,14 +291,14 @@ locals {
     system {
         host-name vsrx-secondary;
         root-authentication {
-            encrypted-password "$1$salt$hashedpassword"; ## SECRET-DATA
+            ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD3P7+HA0h0vbSp0zbEom7iPOV2nMj/X/kkZKYQRyFrVN0bnI7QZ3BrQ5JZ8vFq4VjH/WdFmL5/7NXZSHN7aWxvRL9wEfMmQ4C5RdHyJ5ZJ0rOJYKYJY9gpGFf0QDY2Sxh2P5c6bQXxFT7LMf9PPdQgGs9S6yJf0fJgn0wZ0Wdm+8jeHzJU4CQkQZZAFRjs4MNbZnrciRFM7X+aJ02OjTZUqqJYBGhvQnwD/fX0+s/ojPNyh5FmEbZwj7cKZFj7TH2Qoh9ZU6O0s+64mMOOb8qz3PUzLnKAMUYnzD9DMwuYqCgVP+bdlj0rZRk4Nn9GoZZ8P9kdnoVQZrBQwrOrKvkD";
         }
         login {
             user admin {
                 uid 2000;
                 class super-user;
                 authentication {
-                    encrypted-password "$1$salt$hashedpassword"; ## SECRET-DATA
+                    ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD3P7+HA0h0vbSp0zbEom7iPOV2nMj/X/kkZKYQRyFrVN0bnI7QZ3BrQ5JZ8vFq4VjH/WdFmL5/7NXZSHN7aWxvRL9wEfMmQ4C5RdHyJ5ZJ0rOJYKYJY9gpGFf0QDY2Sxh2P5c6bQXxFT7LMf9PPdQgGs9S6yJf0fJgn0wZ0Wdm+8jeHzJU4CQkQZZAFRjs4MNbZnrciRFM7X+aJ02OjTZUqqJYBGhvQnwD/fX0+s/ojPNyh5FmEbZwj7cKZFj7TH2Qoh9ZU6O0s+64mMOOb8qz3PUzLnKAMUYnzD9DMwuYqCgVP+bdlj0rZRk4Nn9GoZZ8P9kdnoVQZrBQwrOrKvkD";
                 }
             }
         }
