@@ -13,28 +13,6 @@ provider "aws" {
   region = "eu-west-1"  # Ireland region
 }
 
-# Variables
-variable "vpc_cidr" {
-  description = "CIDR block for the VPC"
-  default     = "10.0.0.0/16"
-}
-
-variable "availability_zones" {
-  description = "Availability zones for redundancy"
-  type        = list(string)
-  default     = ["eu-west-1a", "eu-west-1b"]
-}
-
-variable "instance_type" {
-  description = "EC2 instance type for vSRX"
-  default     = "c5.xlarge"  # Recommended for vSRX
-}
-
-variable "key_name" {
-  description = "SSH key pair name"
-  default     = "vsrx-key"
-}
-
 # Create VPC
 resource "aws_vpc" "vsrx_vpc" {
   cidr_block           = var.vpc_cidr
@@ -165,7 +143,7 @@ resource "aws_network_interface" "vsrx_data_eni" {
 # Elastic IPs for management interfaces
 resource "aws_eip" "vsrx_mgmt_eip" {
   count      = 2
-  domain     = "vpc"
+  vpc        = true
   depends_on = [aws_internet_gateway.igw]
 
   tags = {
@@ -180,21 +158,21 @@ resource "aws_eip_association" "vsrx_eip_assoc" {
   allocation_id        = aws_eip.vsrx_mgmt_eip[count.index].id
 }
 
-# Data source for Juniper vSRX AMI with license included
-data "aws_ami" "vsrx_ami" {
-  most_recent = true
-  owners      = ["aws-marketplace"]
-
-  filter {
-    name   = "name"
-    values = ["Juniper-vSRX-*-BYOL*"]
-  }
-
-  filter {
-    name   = "product-code"
-    values = ["6njl1pau431dv1qxipg63mvah"]  # Product code for Juniper vSRX with license included
-  }
-}
+# Data source for Juniper vSRX AMI - commented out and using hardcoded AMI instead
+# data "aws_ami" "vsrx_ami" {
+#   most_recent = true
+#   owners      = ["aws-marketplace"]
+#
+#   filter {
+#     name   = "name"
+#     values = ["*vSRX-BYOL*"]
+#   }
+#
+#   filter {
+#     name   = "virtualization-type"
+#     values = ["hvm"]
+#   }
+# }
 
 # vSRX user-data configuration for primary instance
 locals {
@@ -400,7 +378,7 @@ locals {
 # vSRX instances for redundancy
 resource "aws_instance" "vsrx_instance" {
   count         = 2
-  ami           = data.aws_ami.vsrx_ami.id
+  ami           = "ami-02c031e72355287f2"  # Using Juniper vSRX AMI (23.4R2.13-appsec)
   instance_type = var.instance_type
   key_name      = var.key_name
   user_data     = count.index == 0 ? local.vsrx_primary_config : local.vsrx_secondary_config
@@ -427,14 +405,4 @@ resource "aws_instance" "vsrx_instance" {
 }
 
 # Output the public IPs of the vSRX instances
-output "vsrx_public_ips" {
-  value = aws_eip.vsrx_mgmt_eip[*].public_ip
-}
-
-output "vsrx_primary_instance_id" {
-  value = aws_instance.vsrx_instance[0].id
-}
-
-output "vsrx_secondary_instance_id" {
-  value = aws_instance.vsrx_instance[1].id
-}
+# Outputs are defined in outputs.tf

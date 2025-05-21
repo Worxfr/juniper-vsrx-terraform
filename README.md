@@ -73,11 +73,17 @@ This Terraform project deploys Juniper vSRX instances in AWS with redundancy con
 
 ## Prerequisites
 
+> [!IMPORTANT]
+> **You must have a valid subscription to Juniper vSRX in the AWS Marketplace before deploying this infrastructure.**
+> 
+> Without an active subscription, the deployment will fail when attempting to launch the vSRX instances.
+
 1. AWS account with appropriate permissions
-2. Terraform installed (version 0.12+)
-3. AWS CLI configured with appropriate credentials
-4. SSH key pair created in the AWS Ireland region
-5. S3 bucket for storing Terraform state
+2. Valid subscription to Juniper vSRX in the AWS Marketplace
+3. Terraform installed (version 0.12+)
+4. AWS CLI configured with appropriate credentials
+5. SSH key pair created in the AWS Ireland region
+6. S3 bucket for storing Terraform state
 
 ## Usage
 
