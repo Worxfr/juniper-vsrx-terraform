@@ -87,6 +87,13 @@ This Terraform project deploys Juniper vSRX instances in AWS with redundancy con
 
 2. Configure the S3 backend:
    - Review and update the `config.s3.tfbackend` file with your S3 bucket information
+   
+   Sample `config.s3.tfbackend` file:
+   ```
+   bucket="your-terraform-state-bucket"
+   key="juniper-vsrx/terraform.tfstate"
+   region="eu-west-1"
+   ```
 
 3. Initialize Terraform with the backend configuration:
    ```
