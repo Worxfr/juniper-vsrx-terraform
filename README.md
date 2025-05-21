@@ -69,6 +69,7 @@ This Terraform project deploys Juniper vSRX instances in AWS with redundancy con
 - Configures management and data interfaces
 - Sets up basic security zones and policies
 - Includes initial Junos configuration via user-data
+- Remote state management with S3 backend
 
 ## Prerequisites
 
@@ -76,39 +77,43 @@ This Terraform project deploys Juniper vSRX instances in AWS with redundancy con
 2. Terraform installed (version 0.12+)
 3. AWS CLI configured with appropriate credentials
 4. SSH key pair created in the AWS Ireland region
+5. S3 bucket for storing Terraform state
 
 ## Usage
 
 1. Update the `variables.tf` file with your specific requirements:
    - Change the default SSH key name
-   - Update the admin password
    - Modify instance type if needed
 
-2. Initialize Terraform:
+2. Configure the S3 backend:
+   - Review and update the `config.s3.tfbackend` file with your S3 bucket information
+
+3. Initialize Terraform with the backend configuration:
    ```
-   terraform init
+   terraform init -backend-config=config.s3.tfbackend
    ```
 
-3. Plan the deployment:
+4. Plan the deployment:
    ```
    terraform plan
    ```
 
-4. Apply the configuration:
+5. Apply the configuration:
    ```
    terraform apply
    ```
 
-5. Access your vSRX instances:
+6. Access your vSRX instances:
    - SSH: `ssh admin@<public-ip>`
    - Web UI (J-Web): `https://<public-ip>`
 
 ## Important Notes
 
 - The default configuration includes basic security settings
-- Remember to change the default admin password in the variables.tf file
+- Authentication is handled by AWS key pairs (no password authentication)
 - The vSRX instances are deployed with source/destination check disabled
 - The AMI used is the license-included version from AWS Marketplace
+- Terraform state is stored remotely in an S3 bucket for team collaboration
 
 ## Cleanup
 
@@ -117,3 +122,7 @@ To remove all resources created by this Terraform configuration:
 ```
 terraform destroy
 ```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
